@@ -41,16 +41,20 @@ router.post("/", async (req, res) => {
 router.get("/check-email", async (req, res) => {
   const email = req.query.email;
 
-  try {
-    // Проверка уникальности email
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res
-        .status(200)
-        .json({ exists: true, message: "Email уже используется" });
-    }
+  if (!email) {
+    return res.status(400).json({ message: "Email is required" });
+  } else {
+    console.log("Проверка email:", email);
+  }
 
-    res.status(200).json({ exists: false, message: "Email доступен" });
+  try {
+    const user = await User.findOne({ where: { email } });
+
+    if (user) {
+      return res.json({ exists: true, message: "Email уже используется" });
+    } else {
+      return res.json({ exists: false, message: "Email доступен" });
+    }
   } catch (error) {
     console.error("Ошибка при проверке email:", error);
     res.status(500).json({ message: "Ошибка сервера" });
