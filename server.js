@@ -6,7 +6,7 @@ const app = express();
 require("dotenv").config();
 
 // Middleware для обработки JSON
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Включаем CORS с настройками по умолчанию
 app.use(cors());
