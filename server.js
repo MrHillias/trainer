@@ -32,6 +32,8 @@ const PORT = 3000;
 //Основная дб
 const sequelize = require("./db");
 
+console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
+
 // Проверка соединения с БД
 sequelize
   .authenticate()
