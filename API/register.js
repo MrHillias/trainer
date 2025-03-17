@@ -38,13 +38,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/check-email", async (req, res) => {
-  const email = req.query.email;
+router.post("/check-email", async (req, res) => {
+  const { email } = req.body; // Извлекаем email из тела запроса
 
   if (!email) {
     return res.status(400).json({ message: "Email is required" });
-  } else {
-    console.log("Проверка email:", email);
   }
 
   try {
