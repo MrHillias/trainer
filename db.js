@@ -1,8 +1,13 @@
 const { Sequelize } = require("sequelize");
 
-module.exports = new Sequelize("db_metavision", "user", "Fud5e@$$", {
-  host: "79.174.88.83",
-  port: "19684",
-  dialect: "postgres",
-  logging: console.log, // Включаем логирование SQL-запросов
-});
+module.exports = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: "postgres",
+    logging: console.log, // Включаем логирование SQL-запросов
+  }
+);
