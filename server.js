@@ -32,6 +32,12 @@ const PORT = 3000;
 //Основная дб
 const sequelize = require("./db");
 
+// Синхронизация модели с базой данных
+sequelize
+  .sync()
+  .then(() => console.log("Таблицы синхронизированы"))
+  .catch((err) => console.error("Ошибка синхронизации таблиц:", err));
+
 // Проверка соединения с БД
 sequelize
   .authenticate()
