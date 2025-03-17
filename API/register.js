@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/check-email", async (req, res) => {
+router.get("/check-email", async (req, res) => {
   const { email } = req.body; // Извлекаем email из тела запроса
 
   if (!email) {
