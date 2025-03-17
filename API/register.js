@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/check-email", async (req, res) => {
-  const { email } = req.query;
+  const email = req.query.email;
 
   try {
     // Проверка уникальности email
