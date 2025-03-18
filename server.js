@@ -36,6 +36,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Подключение и синхронизация с базами данных
+connectAndSyncDatabase();
+
 //Экспорт путей API
 const registerRoutes = require("./API/register");
 
@@ -44,9 +47,6 @@ app.use("/api/register", registerRoutes);
 
 // Определение порта
 const PORT = 3000;
-
-// Подключение и синхронизация с базами данных
-connectAndSyncDatabase();
 
 // Обработка GET-запроса к корневому маршруту
 app.get("/", (req, res) => {
