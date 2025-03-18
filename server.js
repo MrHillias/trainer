@@ -29,7 +29,7 @@ app.use(cors());
 
 // Настройка CORS
 const corsOptions = {
-  origin: "http://geula-list.ru",
+  origin: "http://systemanalyst.yoursimulator.ru",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 204,
 };
