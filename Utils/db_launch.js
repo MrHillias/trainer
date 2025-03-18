@@ -29,8 +29,16 @@ async function connectAndSyncDatabase() {
       `Синхронизация с базой данных (${process.env.NODE_ENV}) завершена.`
     );
   } catch (error) {
+    console.log(
+      `Подключение к базе данных (${process.env.NODE_ENV}) неудачно.`
+    );
+    console.log("DB_NAME:", process.env.DB_NAME);
+    console.log("DB_USER:", process.env.DB_USER);
+    console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
+    console.log("DB_HOST:", process.env.DB_HOST);
+    console.log("DB_PORT:", process.env.DB_PORT);
     console.error(
-      "Ошибка при подключении или синхронизации с базой данных (${process.env.NODE_ENV}):",
+      "Ошибка при подключении или синхронизации с базой данных:",
       error
     );
   }
