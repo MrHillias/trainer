@@ -30,7 +30,7 @@ async function connectAndSyncDatabase() {
     );
   } catch (error) {
     console.error(
-      "Ошибка при подключении или синхронизации с базой данных:",
+      "Ошибка при подключении или синхронизации с базой данных (${process.env.NODE_ENV}):",
       error
     );
   }
