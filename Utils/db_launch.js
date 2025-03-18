@@ -2,26 +2,32 @@ const sequelizeProd = require("../Databases/db_prod");
 const sequelizeDev = require("../Databases/db_dev");
 const sequelizeTest = require("../Databases/db_test");
 
-const UserProd = require("../Models/User");
-const UserDev = require("../Models/User");
-const UserTest = require("../Models/User");
+const User = require("../Models/User");
 
-async function connectAndSyncDatabases() {
+async function connectAndSyncDatabase() {
+  let sequelize;
+
+  switch (process.env.NODE_ENV) {
+    case "production":
+      sequelize = sequelizeProd;
+      break;
+    case "development":
+      sequelize = sequelizeDev;
+      break;
+    case "test":
+      sequelize = sequelizeTest;
+      break;
+    default:
+      throw new Error("NODE_ENV not set or invalid");
+  }
+
   try {
-    await sequelizeProd.authenticate();
-    console.log("Подключение к продакшн базе данных успешно.");
-    await sequelizeProd.sync();
-    console.log("Синхронизация с продакшн базой данных завершена.");
-
-    await sequelizeDev.authenticate();
-    console.log("Подключение к базе данных разработки успешно.");
-    await sequelizeDev.sync();
-    console.log("Синхронизация с базой данных разработки завершена.");
-
-    await sequelizeTest.authenticate();
-    console.log("Подключение к тестовой базе данных успешно.");
-    await sequelizeTest.sync();
-    console.log("Синхронизация с тестовой базой данных завершена.");
+    await sequelize.authenticate();
+    console.log(`Подключение к базе данных (${process.env.NODE_ENV}) успешно.`);
+    await sequelize.sync();
+    console.log(
+      `Синхронизация с базой данных (${process.env.NODE_ENV}) завершена.`
+    );
   } catch (error) {
     console.error(
       "Ошибка при подключении или синхронизации с базой данных:",
@@ -31,8 +37,6 @@ async function connectAndSyncDatabases() {
 }
 
 module.exports = {
-  connectAndSyncDatabases,
-  UserProd,
-  UserDev,
-  UserTest,
+  connectAndSyncDatabase,
+  User,
 };
