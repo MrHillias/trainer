@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const connectAndSyncDatabases = require("./Utils/db_launch");
+const { connectAndSyncDatabase } = require("./Utils/db_launch");
 const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv");
@@ -46,7 +46,7 @@ app.use("/api/register", registerRoutes);
 const PORT = 3000;
 
 // Подключение и синхронизация с базами данных
-connectAndSyncDatabases();
+connectAndSyncDatabase();
 
 // Обработка GET-запроса к корневому маршруту
 app.get("/", (req, res) => {
