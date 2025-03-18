@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { connectAndSyncDatabases } = require("./Utils/db_launch");
+const connectAndSyncDatabases = require("./Utils/db_launch");
 const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv");
