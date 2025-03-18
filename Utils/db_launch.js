@@ -22,12 +22,18 @@ async function connectAndSyncDatabase() {
   }
 
   try {
-    await sequelize.authenticate();
-    console.log(`Подключение к базе данных (${process.env.NODE_ENV}) успешно.`);
-    await sequelize.sync();
-    console.log(
-      `Синхронизация с базой данных (${process.env.NODE_ENV}) завершена.`
-    );
+    sequelize
+      .authenticate()
+      .then(() => console.log("Соединение с базой данных установлено"))
+      .catch((err) =>
+        console.error("Невозможно подключиться к базе данных:", err)
+      );
+
+    // Синхронизация таблиц
+    sequelize
+      .sync()
+      .then(() => console.log("Основные таблицы синхронизированы"))
+      .catch((err) => console.error("Ошибка синхронизации:", err));
   } catch (error) {
     console.log(
       `Подключение к базе данных (${process.env.NODE_ENV}) неудачно.`
