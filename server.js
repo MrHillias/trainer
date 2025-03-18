@@ -1,9 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const { connectAndSyncDatabases } = require("./Utils/db_launch");
 const cors = require("cors");
 const app = express();
+const dotenv = require("dotenv");
 
 require("dotenv").config();
+
+switch (process.env.NODE_ENV) {
+  case "development":
+    dotenv.config({ path: ".env.development" });
+    break;
+  case "test":
+    dotenv.config({ path: ".env.test" });
+    break;
+  case "production":
+    dotenv.config({ path: ".env.production" });
+    break;
+  default:
+    throw new Error("NODE_ENV not set");
+}
 
 // Middleware для обработки JSON
 app.use(express.json());
@@ -29,20 +45,8 @@ app.use("/api/register", registerRoutes);
 // Определение порта
 const PORT = 3000;
 
-//Основная дб
-const sequelize = require("./db");
-
-// Синхронизация модели с базой данных
-sequelize
-  .sync()
-  .then(() => console.log("Таблицы синхронизированы"))
-  .catch((err) => console.error("Ошибка синхронизации таблиц:", err));
-
-// Проверка соединения с БД
-sequelize
-  .authenticate()
-  .then(() => console.log("Соединение с базой данных установлено"))
-  .catch((err) => console.error("Невозможно подключиться к базе данных:", err));
+// Подключение и синхронизация с базами данных
+connectAndSyncDatabases();
 
 // Обработка GET-запроса к корневому маршруту
 app.get("/", (req, res) => {
