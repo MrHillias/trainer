@@ -7,6 +7,8 @@ console.log("DB_PASSWORD (перед подключением):", process.env.DB
 console.log("DB_HOST (перед подключением):", process.env.DB_HOST);
 console.log("DB_PORT (перед подключением):", process.env.DB_PORT);
 
+console.log("Тип DB_PASSWORD:", typeof process.env.DB_PASSWORD);
+
 // Создание подключения к базе данных с использованием переменных окружения
 const sequelize = new Sequelize(
   process.env.DB_NAME,
