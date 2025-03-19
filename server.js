@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv");
 
-require("dotenv").config();
+dotenv.config();
 
 switch (process.env.NODE_ENV) {
   case "development":
@@ -20,6 +20,15 @@ switch (process.env.NODE_ENV) {
   default:
     throw new Error("NODE_ENV not set");
 }
+
+// Логируем переменные окружения, чтобы убедиться, что они правильно загружены
+console.log("Загружены переменные окружения:");
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("DB_NAME:", process.env.DB_NAME);
+console.log("DB_USER:", process.env.DB_USER);
+console.log("DB_HOST:", process.env.DB_HOST);
+console.log("DB_PORT:", process.env.DB_PORT);
+console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
 
 // Middleware для обработки JSON
 app.use(express.json());
