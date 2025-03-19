@@ -11,7 +11,7 @@ module.exports = {
     logging: console.log, // Включаем логирование SQL-запросов для разработки
   },
   test: {
-    username: process.env.DB_NAME,
+    username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
@@ -20,7 +20,7 @@ module.exports = {
     logging: false, // Отключаем логирование для тестов
   },
   production: {
-    username: process.env.DB_NAME,
+    username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,

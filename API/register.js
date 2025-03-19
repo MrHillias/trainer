@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
   const { name, email, password } = req.body;
 
   console.log("Request body:", req.body); // для отладки
-
+  console.log("User model:", User);
   try {
     // Хеширование пароля
     const hashedPassword = await bcrypt.hash(password, 10);
