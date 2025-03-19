@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 const dotenv = require("dotenv");
 
-require("dotenv").config();
+// require("dotenv").config();
 
 switch (process.env.NODE_ENV) {
   case "development":

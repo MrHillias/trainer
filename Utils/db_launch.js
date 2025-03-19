@@ -32,6 +32,7 @@ async function connectAndSyncDatabase() {
     console.log(
       `Синхронизация с базой данных (${process.env.NODE_ENV}) завершена.`
     );
+    console.error("Детали ошибки:", error.stack);
   } catch (error) {
     console.log(
       `Подключение к базе данных (${process.env.NODE_ENV}) неудачно.`
